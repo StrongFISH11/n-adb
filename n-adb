@@ -1,0 +1,12 @@
+#!/data/data/com.termux/files/usr/bin/bash
+if [ -z "$1" ]; then
+    cat "$(dirname "$0")/cmd.ls"
+    exit 0
+fi
+CMD="$(dirname "$0")/$1"
+if [ -x "$CMD" ]; then
+    exec "$CMD" "${@:2}"
+else
+    echo "unknown command: $1"
+    cat "$(dirname "$0")/cmd.ls"
+fi

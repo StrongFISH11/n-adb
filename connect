@@ -1,0 +1,11 @@
+#!/data/data/com.termux/files/usr/bin/bash
+termux-notification \
+    --id adbpair \
+    --title 'Input' \
+    --content 'HOST[:PORT]' \
+    --priority high \
+    --ongoing \
+    --button1 Enter \
+    --button1-action 'adb connect "$REPLY"' \
+    --button2 Settings \
+    --button2-action 'am start -a android.settings.APPLICATION_DEVELOPMENT_SETTINGS'
