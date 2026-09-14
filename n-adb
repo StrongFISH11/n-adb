@@ -1,12 +1,20 @@
 #!/data/data/com.termux/files/usr/bin/bash
+SELF="$0"
+while [ -L "$SELF" ]; do
+    SELF="$(readlink "$SELF")"
+done
+BASE="$(cd "$(dirname "$SELF")" && pwd)"
+
 if [ -z "$1" ]; then
-    cat "$(dirname "$0")/cmd.ls"
+    cat "$BASE/cmd.ls"
     exit 0
 fi
-CMD="$(dirname "$0")/$1"
+
+CMD="$BASE/$1"
 if [ -x "$CMD" ]; then
     exec "$CMD" "${@:2}"
 else
     echo "unknown command: $1"
-    cat "$(dirname "$0")/cmd.ls"
+    echo
+    cat "$BASE/cmd.ls"
 fi
